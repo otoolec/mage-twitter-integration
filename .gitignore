@@ -1,0 +1,7 @@
+# Composer files
+composer.lock
+vendor/
+
+# Secret files
+twitter_credentials.yml
+

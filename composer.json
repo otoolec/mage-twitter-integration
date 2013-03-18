@@ -1,0 +1,7 @@
+{
+    "require": {
+        "silex/silex": "1.0.*@dev",
+        "themattharris/tmhoauth": "0.7.5",
+        "symfony/yaml": "2.2.*@dev"
+    }
+}
