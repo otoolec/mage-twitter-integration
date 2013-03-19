@@ -7,6 +7,7 @@ class Order
     private $_lastName;
     private $_amount;
     private $_currency;
+    private $_id;
 
     public function __construct($data)
     {
@@ -33,6 +34,11 @@ class Order
         return $this->_currency;
     }
 
+    public function getId()
+    {
+        return $this->_id;
+    }
+
     private function _parseData($data)
     {
         if (isset($data['order'])) {
@@ -50,6 +56,9 @@ class Order
             }
             if (isset($data['order']['store_currency_code'])) {
                 $this->_currency =  $data['order']['store_currency_code'];
+            }
+            if (isset($data['order']['increment_id'])) {
+                $this->_id = $data['order']['increment_id'];
             }
         }
     }
