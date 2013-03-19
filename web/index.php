@@ -21,10 +21,13 @@ $app->before(function (Request $request) {
     }
 });
 
-$app->post('/endpoint', function (Application $app, Request $request) {
-  $data = $request->request->all();
-  $order = new Order($data);
-  return $app->json(postOrderToTwitter($order));
+$app->post('/endpoint', function (Application $app) {
+    $app->finish(function(Request $request){
+        $data = $request->request->all();
+        $order = new Order($data);
+        postOrderToTwitter($order);
+    });
+    return '';
 });
 
 $app->run();
