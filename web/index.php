@@ -39,12 +39,12 @@ function postOrderToTwitter(Order $order)
     $tmhOAuth = new tmhOAuth($credentials);
 
     $code = $tmhOAuth->request('POST', $tmhOAuth->url('1/statuses/update'), array(
-      'status' => "Just sold {$order->getAmount()} {$order->getCurrency()} worth of merchandise."
+        'status' => "Just sold {$order->getAmount()} {$order->getCurrency()} worth of merchandise."
     ));
 
-    if ($code == 200) {
-      return json_decode($tmhOAuth->response['response']);
-    } else {
-      return json_decode($tmhOAuth->response['response']);
+    $response = $tmhOAuth->response['response'];
+    if ($code != 200) {
+        error_log($response);
     }
+    return json_decode($response);
 }
