@@ -48,7 +48,7 @@ function postOrderToTwitter(Order $order)
 
     $response = $tmhOAuth->response['response'];
     if ($code != 200) {
-        error_log($response);
+        error_log($code);
     }
     return json_decode($response);
 }
