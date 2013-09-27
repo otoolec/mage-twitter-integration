@@ -42,13 +42,13 @@ function postOrderToTwitter(Order $order)
     $credentials = $ymlParser->parse(file_get_contents('../twitter_credentials.yml'));
     $tmhOAuth = new tmhOAuth($credentials);
 
-    $code = $tmhOAuth->request('POST', $tmhOAuth->url('1/statuses/update'), array(
+    $code = $tmhOAuth->request('POST', $tmhOAuth->url('1.1/statuses/update'), array(
         'status' => $message
     ));
 
     $response = $tmhOAuth->response['response'];
     if ($code != 200) {
-        error_log($code);
+        error_log("Twitter says: {$code}");
     }
     return json_decode($response);
 }
