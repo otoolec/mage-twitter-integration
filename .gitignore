@@ -5,3 +5,6 @@ vendor/
 # Secret files
 twitter_credentials.yml
 
+# IDE files
+.idea
+
