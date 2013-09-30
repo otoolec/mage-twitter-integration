@@ -15,6 +15,7 @@ $app = new Application();
 
 $app['debug'] = true;
 
+// Decode message body from JSON to PHP array
 $app->before(function (Request $request) {
     if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
         $data = json_decode($request->getContent(), true);
@@ -22,6 +23,7 @@ $app->before(function (Request $request) {
     }
 });
 
+// Listen to any POST on our endpoint and setup callback to appropriate helper function
 $app->post('/endpoint', function (Application $app, Request $request) {
     switch ($request->headers->get('Magento-Topic')) {
         case 'order/created':
