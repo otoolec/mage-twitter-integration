@@ -1,6 +1,8 @@
 <?php
 
-
+/**
+ * Class Product that consumes the webhook array and exposes a subset of the data for our application.
+ */
 class Product
 {
     private $_name;
@@ -33,6 +35,7 @@ class Product
             if (isset($data['product']['name'])) {
                 $this->_name = $data['product']['name'];
             }
+            // We don't care about the price decimal, just the user friendly formatted price.
             if (isset($data['product']['formattedPrice'])) {
                 $this->_price =  $data['product']['formattedPrice'];
             }

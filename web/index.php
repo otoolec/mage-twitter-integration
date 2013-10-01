@@ -15,6 +15,12 @@ $app = new Application();
 
 $app['debug'] = true;
 
+/**
+ * This is a sample application to show how we could listen to a Magento webhook and react to it.  This allows us
+ * to easily integrate Magento with another service such as Twitter.  While this example is written in PHP, any
+ * language could be used to react to Magento webhooks.
+ */
+
 // Decode message body from JSON to PHP array
 $app->before(function (Request $request) {
     if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
@@ -34,6 +40,7 @@ $app->post('/endpoint', function (Application $app, Request $request) {
             });
             break;
         case 'product/created':
+            // We send a 200 OK response right away and setup a callback to run after a response is sent.
             $app->finish(function(Request $request){
                 $data = $request->request->all();
                 $order = new Product($data);
@@ -84,6 +91,7 @@ function postMessageToTwitter($message)
     $credentials = $ymlParser->parse(file_get_contents('../twitter_credentials.yml'));
     $tmhOAuth = new tmhOAuth($credentials);
 
+    // When twitter changed from 1 to 1.1 API there was no need to update the Magento extension.
     $code = $tmhOAuth->request('POST', $tmhOAuth->url('1.1/statuses/update'), array(
         'status' => $message
     ));
