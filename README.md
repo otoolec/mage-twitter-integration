@@ -18,3 +18,6 @@ Run the following command to install our dependencies (such as silex)
 1. Copy the `twitter_credentials.yml.dist` file to `twitter_credentials.yml`
 2. Update the yml file with your credentials.
 
+## Usage ##
+
+Create a webhook in Magento and point it to this endpoint `http://<domain>/<install_root>/web/index.php/endpoint`
